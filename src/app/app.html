@@ -1,16 +1,17 @@
 <main>
   <h1 class="title">Tree Menu Demo</h1>
-  {{ app.data }}
-  <tree-item data="{nodes: app.data}" open="true"></tree-item>
+  <tree-item data="{nodes: app.data}" collapsed="true"></tree-item>
 </main>
 <script type="text/ng-template" id="tree-item.html">
-<a href="javascript:void(0)" ng-if="$ctrl.data.title" ng-click="process($ctrl.data)">{{$ctrl.data.title}}</a>
-<ul ng-if="$ctrl.data.nodes">
+<a class="tree-item-handle" href="javascript:void(0)" ng-click="toggle()" ng-if="$ctrl.data.title">
+  <strong ng-show="!collapsed" ng-if="$ctrl.data.nodes">&plus;</strong>
+  <strong ng-show="collapsed" ng-if="$ctrl.data.nodes">&minus;</strong>
+  <span ng-if="!$ctrl.data.nodes">&nbsp;</span>
+</a>
+<a class="tree-item-title" href="javascript:void(0)" ng-if="$ctrl.data.title" ng-click="process($ctrl.data)">{{$ctrl.data.title}}</a>
+<ul class="tree-item-list" ng-if="$ctrl.data.nodes && !collapsed">
   <li ng-repeat="node in $ctrl.data.nodes">
-    <a href="javascript:void(0)" ng-click="$ctrl.toggle(node)">
-      <strong ng-show="!node.open">&gt;</strong>
-    </a>
-    <tree-item data="node"></tree-item>
+    <tree-item ng-if="!collapsed" data="node"></tree-item>
   </li>
 </ul>
 </script>
