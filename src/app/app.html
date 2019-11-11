@@ -4,7 +4,7 @@
   <tree-item data="{nodes: app.data}" open="true"></tree-item>
 </main>
 <script type="text/ng-template" id="tree-item.html">
-<a href="javascript:void(0)" ng-if="$ctrl.data.title" ng-click="$ctrl.process()">{{$ctrl.data.title}}</a>
+<a href="javascript:void(0)" ng-if="$ctrl.data.title" ng-click="process($ctrl.data)">{{$ctrl.data.title}}</a>
 <ul ng-if="$ctrl.data.nodes">
   <li ng-repeat="node in $ctrl.data.nodes">
     <a href="javascript:void(0)" ng-click="$ctrl.toggle(node)">

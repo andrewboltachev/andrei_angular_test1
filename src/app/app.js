@@ -55,8 +55,13 @@ let app = () => {
 class AppCtrl {
   constructor($scope) {
     this.data = data;
-    this.process = (node) => {
-      console.log(node.text);
+  }
+}
+
+class TreeMenuCtrl {
+  constructor($scope) {
+    $scope.process = (node) => {
+      console.log(node.title);
     }
   }
 }
@@ -66,9 +71,11 @@ const MODULE_NAME = 'app';
 angular.module(MODULE_NAME, [])
   .directive('app', app)
   .controller('AppCtrl', AppCtrl)
+  .controller('TreeMenuCtrl', TreeMenuCtrl)
   .component('treeItem', {
     templateUrl: 'tree-item.html',
-    bindings: {data: '<', open: '<'}
+    bindings: {data: '<', open: '<'},
+    controller: 'TreeMenuCtrl'
   });
 
 export default MODULE_NAME;
