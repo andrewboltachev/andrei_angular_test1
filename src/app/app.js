@@ -64,7 +64,7 @@ class TreeMenuCtrl {
       console.log(node.title);
     }
     $scope.toggle = () => {
-      $scope.collapsed = !$scope.collapsed;
+      $scope.expanded = !$scope.expanded;
     }
   }
 }
@@ -77,7 +77,7 @@ angular.module(MODULE_NAME, [])
   .controller('TreeMenuCtrl', TreeMenuCtrl)
   .component('treeItem', {
     templateUrl: 'tree-item.html',
-    bindings: {data: '<', collapsed: '<'},
+    bindings: {data: '<', expanded: '<'},
     controller: 'TreeMenuCtrl'
   });
 
