@@ -1,10 +1,16 @@
 <main>
-  <h1 class="title">Hello from Angular !</h1>
-
-  <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <img src="/img/logo.png">
+  <h1 class="title">Tree Menu Demo</h1>
+  {{ app.data }}
+  <tree-item data="{nodes: app.data}" open="true"></tree-item>
 </main>
-<footer>
-  <a ng-href="{{app.url}}">Webpack Angular Starter</a>
-  <h2>Hello <span>{{ app.name }}</span>!</h2>
-</footer>
+<script type="text/ng-template" id="tree-item.html">
+<a href="javascript:void(0)" ng-if="$ctrl.data.title" ng-click="$ctrl.process()">{{$ctrl.data.title}}</a>
+<ul ng-if="$ctrl.data.nodes && $ctrl.open">
+  <li ng-repeat="node in $ctrl.data.nodes">
+    <a href="javascript:void(0)" ng-click="$ctrl.toggle(node)">
+      <strong ng-show="!node.open">&gt;</strong>
+    </a>
+    <tree-item data="node"></tree-item>
+  </li>
+</ul>
+</script>

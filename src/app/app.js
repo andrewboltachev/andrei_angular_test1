@@ -2,6 +2,48 @@ import angular from 'angular';
 
 import '../style/app.less';
 
+const data = [
+  {
+    title: "Fruits",
+    nodes: [
+      {
+        title: "Apple",
+      },
+      {
+        title: "Banana",
+      },
+      {
+        title: "Orange",
+      },
+      {
+        title: "Kiwi",
+      },
+    ],
+  },
+  {
+    title: "Vegetables",
+    nodes: [
+      {
+        title: "Potato",
+      },
+      {
+        title: "Carrot",
+      },
+      {
+        title: "For salad",
+        nodes: [
+          {
+            title: "Tomato",
+          },
+          {
+            title: "Cucumber",
+          },
+        ]
+      },
+    ],
+  }
+];
+
 let app = () => {
   return {
     template: require('./app.html'),
@@ -11,9 +53,11 @@ let app = () => {
 };
 
 class AppCtrl {
-  constructor() {
-    this.url = 'https://github.com/preboot/angular-webpack';
-    this.name = 'Peter';
+  constructor($scope) {
+    this.data = data;
+    this.process = (node) => {
+      console.log(node.text);
+    }
   }
 }
 
@@ -21,6 +65,10 @@ const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, [])
   .directive('app', app)
-  .controller('AppCtrl', AppCtrl);
+  .controller('AppCtrl', AppCtrl)
+  .component('treeItem', {
+    templateUrl: 'tree-item.html',
+    bindings: {data: '<', open: '<'}
+  });
 
 export default MODULE_NAME;
